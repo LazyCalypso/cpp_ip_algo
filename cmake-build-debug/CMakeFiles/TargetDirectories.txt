@@ -1,3 +1,0 @@
-/home/enzbonolis@uimm-sn.fc/CLionProjects/IP_Algo/cmake-build-debug/CMakeFiles/IP_Algo.dir
-/home/enzbonolis@uimm-sn.fc/CLionProjects/IP_Algo/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/enzbonolis@uimm-sn.fc/CLionProjects/IP_Algo/cmake-build-debug/CMakeFiles/rebuild_cache.dir
