@@ -149,8 +149,7 @@ int* decomposeIP(string ip) {
 
 // IP Réseau
 string ipReseau(string ip, string masque) {
-	// SI PAS DE PARAMETRES, ALORS ON APPELLE LES FONCTIONS
-	// SINON, ON UTILISE LES PARAMETRES
+	// Si pas de paramètres, on appelle les fonctions
 	if (ip == "") { ip = ippointee(); }
 	if (masque == "") { masque = masqueCIDR(); }
 	
@@ -295,4 +294,9 @@ string ipDerniere(string ip, string masque) {
 	}
 
 	return resultStr;
+}
+
+// Adresse de diffusion
+string ipBroadcast(string ip, string masque) {
+	// TODO : Implémenter fonction
 }

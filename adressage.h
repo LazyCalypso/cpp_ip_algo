@@ -25,12 +25,12 @@ string ipReseau(string ip = "", string masque = "");
 string numMachine(string ip = "", string reseau = "");
 string ipPremiere(string ip = "", string masque = "");
 string ipDerniere(string ip = "", string masque = "");
-string ipBroadcast(string reseau = "");
+string ipBroadcast(string ip = "", string masque = "");
 
 // Outils
 int convertToInt(string v);
 bool isInRange(int v);
 int* decomposeIP(string ip);
-int bitsDeReseau(string masque = "");
+int bitsDeReseau(string masque = "");	// TODO
 
 #endif //IP_ALGO_IPPOINTEE_H
