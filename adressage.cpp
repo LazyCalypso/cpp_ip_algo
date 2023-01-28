@@ -2,6 +2,7 @@
 
 using namespace std;
 
+// Conversion d'un string vers un int
 int convertToInt(string v) {
     try {
         return stoi(v);
@@ -11,12 +12,19 @@ int convertToInt(string v) {
     return 1;
 }
 
+// Vérifie que la valeur est comprise entre 0 et 255
 bool isInRange(int v) {
     if (v >= 0 && v <= 255) { return true; } else { return false; }
 }
 
+// Get Classe IP
 string getClasse(int first_ip_num) {
-    if (first_ip_num >= 10 && first_ip_num <= 127) {
+	if (first_ip_num == 0) {
+		cout << "Entrez la première valeur de l'adresse IP : ";
+		cin >> first_ip_num;
+	}
+	
+	if (first_ip_num >= 10 && first_ip_num <= 127) {
         return "La classe est A";
     } else if (first_ip_num >= 128 && first_ip_num <= 191) {
         return "La classe est B";
@@ -27,6 +35,7 @@ string getClasse(int first_ip_num) {
     }
 }
 
+// IP Pointee
 string ippointee() {
     string w, x, y, z;
     string delim = ".";
@@ -63,17 +72,19 @@ string ippointee() {
 	return w + delim + x + delim + y + delim + z;
 }
 
-string masqueCIDR() {
+// Masque réseau via CIDR
+string masqueCIDR(int cidr) {
     cout << "Masque sous forme CIDR : /masque" << endl;
     
     // Tableau contenant un masque par défaut nul, c'est-à-dire
 	// que tous les bits sont à 0.
     bitset<8> ip[4] = { bitset<8>(0), bitset<8>(0), bitset<8>(0), bitset<8>(0) };
 	
-	// Notation CIDR
-    int cidr;
-	cout << "Saisir la notation CIDR : ";
-	cin >> cidr;
+	// Si le CIDR n'est pas renseigné en paramètres, le demander
+	if (cidr == 0) {
+		cout << "Saisir le masque CIDR : ";
+		cin >> cidr;
+	}
     
 	// Set les bits correspondants au CIDR à 1
 	// NOTE : On commence par le bit de poids fort, donc on commence par le bit 7
@@ -104,12 +115,7 @@ string masqueCIDR() {
     return mask;
 }
 
-/* Fonction pour décomposer le string de l'IP/Masque
-	Ex: ippointee retourne "192.168.10.200"
-	Décomposition en 4 parties : "192", "168", "10", "200"
-	Conversion en int
-	Retourne un tableau
-*/
+// Fonction pour décomposer le string de l'IP/Masque
 int* decomposeIP(string ip) {
 	// Délimiteur
 	string delim = ".";
@@ -141,31 +147,148 @@ int* decomposeIP(string ip) {
 	return ipArray;
 }
 
-string ipReseau(string ip, string mask) {
+// IP Réseau
+string ipReseau(string ip, string masque) {
 	// SI PAS DE PARAMETRES, ALORS ON APPELLE LES FONCTIONS
 	// SINON, ON UTILISE LES PARAMETRES
 	if (ip == "") { ip = ippointee(); }
-	if (mask == "") { mask = masqueCIDR(); }
+	if (masque == "") { masque = masqueCIDR(); }
 	
 	// Décomposition du string de l'IP via la fonction "decomposeIP"
 	// qui retourne un pointeur vers un tableau de int
 	int* ipDecompose = decomposeIP(ip);
 	
 	// Décomposition du string du masque
-	int* maskDecompose = decomposeIP(mask);
+	int* masqueDecompose = decomposeIP(masque);
 
 	// Tableau contenant le résultat de l'opération ET logique
 	int* result = new int[4];
 	
 	// Opération ET logique
 	for (int i = 0; i < 4; i++) {
-		result[i] = ipDecompose[i] & maskDecompose[i];
+		result[i] = ipDecompose[i] & masqueDecompose[i];
 	}
 
 	// Transformation du résultat en string
 	string resultStr = "";
 	for (int i = 0; i < 4; i++) {
 		resultStr += to_string(result[i]);
+		if (i != 3) {
+			resultStr += ".";
+		}
+	}
+
+	return resultStr;
+}
+
+// Numéro de machine
+string numMachine(string ip, string reseau) {
+	if (ip == "") { ip = ippointee(); }
+	if (reseau == "") { reseau = ipReseau(ip); }
+
+	// Décomposition du string de l'IP
+	int* ipDecomposee = decomposeIP(ip);
+	
+	// Décomposition du string du masque
+	int* reseauDecomposee = decomposeIP(reseau);
+
+	// Tableau contenant le résultat de l'opération OU exclusif
+	int* result = new int[4];
+
+	// Opération OU exclusif
+	for (int i = 0; i < 4; i++) {
+		result[i] = ipDecomposee[i] ^ reseauDecomposee[i];
+	}
+
+	// Transformation du résultat en string
+	string resultStr = "";
+	for (int i = 0; i < 4; i++) {
+		resultStr += to_string(result[i]);
+		if (i != 3) {
+			resultStr += ".";
+		}
+	}
+
+	return resultStr;
+}
+
+// Bits de réseau
+int bitsDeReseau(string masque) {
+	if (masque == "") { masque = masqueCIDR(); }
+
+	// Décomposition du masque
+	int* masqueDecompose = decomposeIP(masque);
+	
+	// Calcul du nombre de bits à 1
+	int bits = 0;
+	for (int i = 0; i < 4; i++) {
+		for (int j = 0; j < 8; j++) {
+			if (masqueDecompose[i] & (1 << j)) {
+				bits++;
+			}
+		}
+	}
+	
+	return bits;
+}
+
+// Adresse première machine
+string ipPremiere(string ip, string masque) {
+	if (ip == "") { ip = ippointee(); }
+	if (masque == "") { masque = masqueCIDR(); }
+
+	// Calcul de l'IP réseau
+	string reseau = ipReseau(ip, masque);
+
+	// Décomposition du réseau
+	int* reseauDecompose = decomposeIP(reseau);
+
+	// Ajout de l'offset de la première machine (0.0.0.1)
+	reseauDecompose[3] += 1;
+	
+	// Transformation du résultat en string
+	string resultStr = "";
+	for (int i = 0; i < 4; i++) {
+		resultStr += to_string(reseauDecompose[i]);
+		if (i != 3) {
+			resultStr += ".";
+		}
+	}
+	
+	return resultStr;
+}
+
+// Adresse dernière machine
+string ipDerniere(string ip, string masque) {
+	if (ip == "") { ip = ippointee(); }
+	if (masque == "") { masque = masqueCIDR(); }
+
+	// Calcul de l'IP réseau
+	string reseau = ipReseau(ip, masque);
+
+	// Décomposition du réseau
+	int* reseauDecompose = decomposeIP(reseau);
+
+	// Calcul du nombre de bits de réseau
+	int bits = bitsDeReseau(masque);
+	int offset = pow(2, 32 - bits) - 2;
+
+	// Ajout de l'offset de la dernière machine grâce au nombre de bits de réseau
+	for (int i = 3; i >= 0; i--) {
+		reseauDecompose[i] += offset;
+		if (reseauDecompose[i] > 255) {
+			offset = reseauDecompose[i] / 256;
+			reseauDecompose[i] = reseauDecompose[i] % 256;
+		}
+		else {
+			offset = 0;
+		}
+	}
+
+	// Transformation du résultat en string
+	string resultStr = "";
+	for (int i = 0; i < 4; i++) {
+		resultStr += to_string(reseauDecompose[i]);
 		if (i != 3) {
 			resultStr += ".";
 		}

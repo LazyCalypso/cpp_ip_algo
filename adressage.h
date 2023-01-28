@@ -15,17 +15,22 @@ using namespace std;
 
 // Adresses IP
 string ippointee();
-string classe(int first_ip_num);
+string getClasse(int first_ip_num = 0);
 
 // Masque réseau
-string masqueCIDR();
+string masqueCIDR(int cidr = 0);
+string ipReseau(string ip = "", string masque = "");
 
-// ET LOGIQUE
-string ipReseau(string ip, string mask);
+// Adresses machines
+string numMachine(string ip = "", string reseau = "");
+string ipPremiere(string ip = "", string masque = "");
+string ipDerniere(string ip = "", string masque = "");
+string ipBroadcast(string reseau = "");
 
 // Outils
 int convertToInt(string v);
 bool isInRange(int v);
 int* decomposeIP(string ip);
+int bitsDeReseau(string masque = "");
 
 #endif //IP_ALGO_IPPOINTEE_H
