@@ -94,7 +94,7 @@ string masqueCIDR(int cidr) {
 	}
 
 	// Transformation du masque en string (mais toujours en binaire)
-	// afin de vérifier que le masque est bien correct.
+	// afin de vérifier que le masque est bien correct. (Utilisé pour le debug)
 	string maskStr = "";
 	for (int i = 0; i < 4; i++) {
 		maskStr += ip[i].to_string();
@@ -154,7 +154,7 @@ string ipReseau(string ip, string masque) {
 	if (masque == "") { masque = masqueCIDR(); }
 	
 	// Décomposition du string de l'IP via la fonction "decomposeIP"
-	// qui retourne un pointeur vers un tableau de int
+	// qui retourne un tableau de int contenant les valeurs de W, X, Y, Z
 	int* ipDecompose = decomposeIP(ip);
 	
 	// Décomposition du string du masque
