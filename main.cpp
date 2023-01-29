@@ -11,7 +11,7 @@ int main() {
 	cout << MSG_BIENVENUE << endl;
 	int choix = 0;
 	string masque;
-	while (choix != 9) {
+	while (choix != 10) {
 		cout << "1. Afficher une adresse IP" << endl;
 		cout << "2. Afficher la classe d'une adresse IP" << endl;
 		cout << "3. Calculer le masque d'un réseau via CIDR" << endl;
@@ -20,7 +20,8 @@ int main() {
 		cout << "6. Calculer les bits de réseau via un masque" << endl;
 		cout << "7. Calculer l'adresse de la première machine d'un réseau" << endl;
 		cout << "8. Calculer l'adresse de la dernière machine d'un réseau" << endl;
-		cout << "9. Quitter" << endl;
+		cout << "9. Calculer l'adresse de diffusion d'un réseau" << endl;
+		cout << "10. Quitter" << endl;
 		cout << "Votre choix : ";
 		cin >> choix;
 		cout << endl;
@@ -53,6 +54,9 @@ int main() {
 			cout << ipDerniere() << endl;
 			break;
 		case 9:
+			cout << ipBroadcast() << endl;
+			break;
+		case 10:
 			cout << "Au revoir !" << endl;
 			exit(0);
 		default:

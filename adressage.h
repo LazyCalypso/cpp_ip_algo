@@ -31,6 +31,6 @@ string ipBroadcast(string ip = "", string masque = "");
 int convertToInt(string v);
 bool isInRange(int v);
 int* decomposeIP(string ip);
-int bitsDeReseau(string masque = "");	// TODO
+int bitsDeReseau(string masque = "");
 
 #endif //IP_ALGO_IPPOINTEE_H

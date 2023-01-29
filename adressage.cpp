@@ -181,6 +181,13 @@ string ipReseau(string ip, string masque) {
 }
 
 // Numéro de machine
+/* EXEMPLES
+* IP => 192.168.10.200/28
+* N° MACHINE => 0.0.0.8
+* -----------------------
+* IP => 10.200.11.12/12
+* N° MACHINE => 0.8.11.12
+*/
 string numMachine(string ip, string reseau) {
 	if (ip == "") { ip = ippointee(); }
 	if (reseau == "") { reseau = ipReseau(ip); }
@@ -188,7 +195,7 @@ string numMachine(string ip, string reseau) {
 	// Décomposition du string de l'IP
 	int* ipDecomposee = decomposeIP(ip);
 	
-	// Décomposition du string du masque
+	// Décomposition du string du réseau
 	int* reseauDecomposee = decomposeIP(reseau);
 
 	// Tableau contenant le résultat de l'opération OU exclusif
@@ -232,6 +239,13 @@ int bitsDeReseau(string masque) {
 }
 
 // Adresse première machine
+/* EXEMPLES
+* IP => 192.168.10.200/28
+* PREMIERE MACHINE => 192.168.10.193
+* ----------------------------------
+* IP => 10.200.11.12/12
+* PREMIERE MACHINE => 10.192.0.1
+*/
 string ipPremiere(string ip, string masque) {
 	if (ip == "") { ip = ippointee(); }
 	if (masque == "") { masque = masqueCIDR(); }
@@ -258,6 +272,13 @@ string ipPremiere(string ip, string masque) {
 }
 
 // Adresse dernière machine
+/* EXEMPLES
+* IP => 192.168.10.200/28
+* DERNIERE MACHINE => 192.168.10.206
+* ----------------------------------
+* IP => 10.200.11.12/12
+* DERNIERE MACHINE => 10.207.255.254
+*/
 string ipDerniere(string ip, string masque) {
 	if (ip == "") { ip = ippointee(); }
 	if (masque == "") { masque = masqueCIDR(); }
@@ -297,6 +318,34 @@ string ipDerniere(string ip, string masque) {
 }
 
 // Adresse de diffusion
+/* EXEMPLES
+* IP => 192.168.10.200/28
+* BROADCAST => 192.168.10.207
+* ---------------------------
+* IP => 10.200.11.12/12
+* BROADCAST => 10.207.255.255
+*/
 string ipBroadcast(string ip, string masque) {
-	// TODO : Implémenter fonction
+	if (ip == "") { ip = ippointee(); }
+	if (masque == "") { masque = masqueCIDR(); }
+
+	// Calcul de l'IP de la dernière machine
+	string derniereMachine = ipDerniere(ip, masque);
+	
+	// Décomposition de l'IP
+	int* derniereMachineDecompose = decomposeIP(derniereMachine);
+
+	// Ajout de 1 au dernier octet
+	derniereMachineDecompose[3]++;
+
+	// Transformation du résultat en string
+	string resultStr = "";
+	for (int i = 0; i < 4; i++) {
+		resultStr += to_string(derniereMachineDecompose[i]);
+		if (i != 3) {
+			resultStr += ".";
+		}
+	}
+
+	return resultStr;
 }
