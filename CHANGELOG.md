@@ -15,9 +15,12 @@
 
 ## Build 15.02.2023
 
-  * [chore] minor improvements: 
+  * [chore] minor improvements - [1678dd7](https://github.com/SunlightKim/cpp_ip_algo/commit/1678dd78c30292fc5ac28c11c96abb7c31677dad)
+  ```
   - [x] fixed an issue where the function `convertToInt` would return `1` when it should return `-1` to prevent the program to continue working on invalid input
   - [x] updated function `ippointee` to re-ask for input when the user enters an IP block that is out of range instead of re-calling the function
   - [x] moved the line code `cout << "Masque sous forme CIDR : /masque" << endl` in function `masqueCIDR` to the correct position
   - [x] updated function `getClasse` so that it returns only the class of the IP address instead of the whole `La classe est : XX` string
   - [x] redone the `main` function so that it only asks for the IP address and the mask and then calls all the other functions to display the results
+  ```
+  * [chore] added and updated CHANGELOG.md - [2075082](https://github.com/SunlightKim/cpp_ip_algo/commit/2075082aad8e587f53da31a46a044cb43b7439f3) and latest commit
