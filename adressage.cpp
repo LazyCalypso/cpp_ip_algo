@@ -9,7 +9,7 @@ int convertToInt(string v) {
     } catch (exception& e) {
 		cout << "Erreur lors de la conversion : type invalide. Attendait une valeur numérique, reçu : " << v << endl;
     }
-    return 1;
+    return -1;
 }
 
 // Vérifie que la valeur est comprise entre 0 et 255
@@ -25,11 +25,11 @@ string getClasse(int first_ip_num) {
 	}
 	
 	if (first_ip_num >= 10 && first_ip_num <= 127) {
-        return "La classe est A";
+        return "A";
     } else if (first_ip_num >= 128 && first_ip_num <= 191) {
-        return "La classe est B";
+        return "B";
     } else if (first_ip_num >= 192) {
-        return "La classe est C";
+        return "C";
     } else {
         return "Classe inconnue";
     }
@@ -44,28 +44,32 @@ string ippointee() {
     cin >> w;
     if (!isInRange(convertToInt(w))) {
         cout << IP_NOT_IN_RANGE << endl;
-		ippointee();
+		cout << "Resaissez la valeur : ";
+		cin >> w;
     }
     cout << endl;
     cout << "Saisir la valeur de X : ";
     cin >> x;
     if (!isInRange(convertToInt(x))) {
         cout << IP_NOT_IN_RANGE << endl;
-		ippointee();
+		cout << "Resaissez la valeur : ";
+		cin >> x;
     }
     cout << endl;
     cout << "Saisir la valeur de Y : ";
     cin >> y;
     if (!isInRange(convertToInt(y))) {
         cout << IP_NOT_IN_RANGE << endl;
-		ippointee();
+		cout << "Resaissez la valeur : ";
+		cin >> y;
     }
     cout << endl;
     cout << "Saisir la valeur de Z : ";
     cin >> z;
     if (!isInRange(convertToInt(z))) {
         cout << IP_NOT_IN_RANGE << endl;
-		ippointee();
+		cout << "Resaissez la valeur : ";
+		cin >> z;
     }
     cout << endl;
 
@@ -74,15 +78,13 @@ string ippointee() {
 
 // Masque réseau via CIDR
 string masqueCIDR(int cidr) {
-    cout << "Masque sous forme CIDR : /masque" << endl;
-    
     // Tableau contenant un masque par défaut nul, c'est-à-dire
 	// que tous les bits sont à 0.
     bitset<8> ip[4] = { bitset<8>(0), bitset<8>(0), bitset<8>(0), bitset<8>(0) };
 	
 	// Si le CIDR n'est pas renseigné en paramètres, le demander
 	if (cidr == 0) {
-		cout << "Saisir le masque CIDR : ";
+		cout << "Masque sous forme CIDR : /masque" << endl;
 		cin >> cidr;
 	}
     
