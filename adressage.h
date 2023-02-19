@@ -28,7 +28,8 @@ string ipDerniere(string ip = "", string masque = "");
 string ipBroadcast(string ip = "", string masque = "");
 
 // Outils
-int convertToInt(string v);
+int convertToInt(const string& v);
+string saisirValeur(const string& description);
 bool isInRange(int v);
 int* decomposeIP(string ip);
 int bitsDeReseau(string masque = "");

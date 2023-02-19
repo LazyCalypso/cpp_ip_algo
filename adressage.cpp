@@ -3,7 +3,7 @@
 using namespace std;
 
 // Conversion d'un string vers un int
-int convertToInt(string v) {
+int convertToInt(const string& v) {
     try {
         return stoi(v);
     } catch (exception& e) {
@@ -14,7 +14,20 @@ int convertToInt(string v) {
 
 // Vérifie que la valeur est comprise entre 0 et 255
 bool isInRange(int v) {
-    if (v >= 0 && v <= 255) { return true; } else { return false; }
+	return v >= 0 && v <= 255;
+}
+
+// Saisie de valeur
+string saisirValeur(const string& description) {
+	string v;
+	cout << "Saisir la valeur de : " << description << endl;
+	cin >> v;
+	while (!isInRange(convertToInt(v))) {
+		cout << IP_NOT_IN_RANGE << endl;
+		cout << "Resaissez la valeur : ";
+		cin >> v;
+	}
+	return v;
 }
 
 // Get Classe IP
@@ -40,38 +53,12 @@ string ippointee() {
     string w, x, y, z;
     string delim = ".";
     cout << "L'adresse IP sera de la forme W.X.Y.Z" << endl;
-    cout << "Saisir la valeur de W : ";
-    cin >> w;
-    while (!isInRange(convertToInt(w))) {
-        cout << IP_NOT_IN_RANGE << endl;
-		cout << "Resaissez la valeur : ";
-		cin >> w;
-    }
-    cout << endl;
-    cout << "Saisir la valeur de X : ";
-    cin >> x;
-    while (!isInRange(convertToInt(x))) {
-        cout << IP_NOT_IN_RANGE << endl;
-		cout << "Resaissez la valeur : ";
-		cin >> x;
-    }
-    cout << endl;
-    cout << "Saisir la valeur de Y : ";
-    cin >> y;
-    while (!isInRange(convertToInt(y))) {
-        cout << IP_NOT_IN_RANGE << endl;
-		cout << "Resaissez la valeur : ";
-		cin >> y;
-    }
-    cout << endl;
-    cout << "Saisir la valeur de Z : ";
-    cin >> z;
-    while (!isInRange(convertToInt(z))) {
-        cout << IP_NOT_IN_RANGE << endl;
-		cout << "Resaissez la valeur : ";
-		cin >> z;
-    }
-    cout << endl;
+    
+	// Saisir chaque valeur de l'adresse IP
+	w = saisirValeur("W");
+	x = saisirValeur("X");
+	y = saisirValeur("Y");
+	z = saisirValeur("Z");
 
 	return w + delim + x + delim + y + delim + z;
 }
