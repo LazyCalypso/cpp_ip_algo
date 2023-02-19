@@ -82,16 +82,6 @@ string masqueCIDR(int cidr) {
 		ip[i / 8].set(static_cast<size_t>(7) - (i % 8));	// NOTE : static_cast<size_t> pour éviter le dépassement opérateur
 	}
 
-	// Transformation du masque en string (mais toujours en binaire)
-	// afin de vérifier que le masque est bien correct. (Utilisé pour le debug)
-	string maskStr = "";
-	for (int i = 0; i < 4; i++) {
-		maskStr += ip[i].to_string();
-		if (i != 3) {
-			maskStr += ".";
-		}
-	}
-
     // Transformation du masque en IP lisible (en décimal)
 	string mask = "";
 	for (int i = 0; i < 4; i++) {
