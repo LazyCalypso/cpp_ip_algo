@@ -94,16 +94,14 @@ string masqueCIDR(int cidr) {
 		ip[i / 8].set(static_cast<size_t>(7) - (i % 8));	// NOTE : static_cast<size_t> pour éviter le dépassement opérateur
 	}
 
-    // Transformation du masque en IP lisible (en décimal)
-	string mask = "";
+    // Création d'un tableau contenant une conversion en int
+	int* ipInt = new int[4];
 	for (int i = 0; i < 4; i++) {
-		mask += to_string(ip[i].to_ulong());
-		if (i != 3) {
-			mask += ".";
-		}
+		ipInt[i] = static_cast<int>(ip[i].to_ulong());
 	}
 
-    return mask;
+	// Conversion du tableau en string
+	return convertArrayToString(ipInt);
 }
 
 // Fonction pour décomposer le string de l'IP/Masque
