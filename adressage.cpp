@@ -42,7 +42,7 @@ string ippointee() {
     cout << "L'adresse IP sera de la forme W.X.Y.Z" << endl;
     cout << "Saisir la valeur de W : ";
     cin >> w;
-    if (!isInRange(convertToInt(w))) {
+    while (!isInRange(convertToInt(w))) {
         cout << IP_NOT_IN_RANGE << endl;
 		cout << "Resaissez la valeur : ";
 		cin >> w;
@@ -50,7 +50,7 @@ string ippointee() {
     cout << endl;
     cout << "Saisir la valeur de X : ";
     cin >> x;
-    if (!isInRange(convertToInt(x))) {
+    while (!isInRange(convertToInt(x))) {
         cout << IP_NOT_IN_RANGE << endl;
 		cout << "Resaissez la valeur : ";
 		cin >> x;
@@ -58,7 +58,7 @@ string ippointee() {
     cout << endl;
     cout << "Saisir la valeur de Y : ";
     cin >> y;
-    if (!isInRange(convertToInt(y))) {
+    while (!isInRange(convertToInt(y))) {
         cout << IP_NOT_IN_RANGE << endl;
 		cout << "Resaissez la valeur : ";
 		cin >> y;
@@ -66,7 +66,7 @@ string ippointee() {
     cout << endl;
     cout << "Saisir la valeur de Z : ";
     cin >> z;
-    if (!isInRange(convertToInt(z))) {
+    while (!isInRange(convertToInt(z))) {
         cout << IP_NOT_IN_RANGE << endl;
 		cout << "Resaissez la valeur : ";
 		cin >> z;
