@@ -20,7 +20,7 @@ bool isInRange(int v) {
 // Saisie de valeur
 string saisirValeur(const string& description) {
 	string v;
-	cout << "Saisir la valeur de : " << description << endl;
+	cout << "Saisir la valeur de " << description << " : ";
 	cin >> v;
 	while (!isInRange(convertToInt(v))) {
 		cout << IP_NOT_IN_RANGE << endl;
