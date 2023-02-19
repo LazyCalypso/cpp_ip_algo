@@ -23,4 +23,8 @@
   - [x] updated function `getClasse` so that it returns only the class of the IP address instead of the whole `La classe est : XX` string
   - [x] redone the `main` function so that it only asks for the IP address and the mask and then calls all the other functions to display the results
   ```
-  * [chore] added and updated CHANGELOG.md - [2075082](https://github.com/SunlightKim/cpp_ip_algo/commit/2075082aad8e587f53da31a46a044cb43b7439f3) and latest commit
+
+## Build 19.02.2023
+
+ * [fix] fixed an issue in `ippointee()` where the value was not checked everytime (e.g. after a first invalid input, the program would accept any input) - [e502fe2f](https://github.com/SunlightKim/cpp_ip_algo/commit/e502fe2f4e7efcca1fd590b27a01ac78d6f77dcb)
+ * [chore] updated CHANGELOG - 
