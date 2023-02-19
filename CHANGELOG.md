@@ -27,4 +27,4 @@
 ## Build 19.02.2023
 
  * [fix] fixed an issue in `ippointee()` where the value was not checked everytime (e.g. after a first invalid input, the program would accept any input) - [e502fe2f](https://github.com/SunlightKim/cpp_ip_algo/commit/e502fe2f4e7efcca1fd590b27a01ac78d6f77dcb)
- * [chore] updated CHANGELOG - [latest]
+ * [performance] general optimization - [fcce83fd](https://github.com/SunlightKim/cpp_ip_algo/commit/fcce83fd6f03e628ce8106aa1168d6b0a9e868da)
