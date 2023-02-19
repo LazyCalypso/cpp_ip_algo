@@ -12,6 +12,18 @@ int convertToInt(const string& v) {
     return -1;
 }
 
+// Conversion d'un tableau d'entiers vers un string
+string convertArrayToString(int* array) {
+	string resultStr = "";
+	for (int i = 0; i < 4; i++) {
+		resultStr += to_string(array[i]);
+		if (i != 3) {
+			resultStr += ".";
+		}
+	}
+	return resultStr;
+}
+
 // Vérifie que la valeur est comprise entre 0 et 255
 bool isInRange(int v) {
 	return v >= 0 && v <= 255;
@@ -148,15 +160,8 @@ string ipReseau(string ip, string masque) {
 	}
 
 	// Transformation du résultat en string
-	string resultStr = "";
-	for (int i = 0; i < 4; i++) {
-		resultStr += to_string(result[i]);
-		if (i != 3) {
-			resultStr += ".";
-		}
-	}
 
-	return resultStr;
+	return convertArrayToString(result);
 }
 
 // Numéro de machine
@@ -186,15 +191,7 @@ string numMachine(string ip, string reseau) {
 	}
 
 	// Transformation du résultat en string
-	string resultStr = "";
-	for (int i = 0; i < 4; i++) {
-		resultStr += to_string(result[i]);
-		if (i != 3) {
-			resultStr += ".";
-		}
-	}
-
-	return resultStr;
+	return convertArrayToString(result);
 }
 
 // Bits de réseau (inverse de masqueCIDR)
@@ -246,15 +243,7 @@ string ipPremiere(string ip, string masque) {
 	reseauDecompose[3] += 1;
 	
 	// Transformation du résultat en string
-	string resultStr = "";
-	for (int i = 0; i < 4; i++) {
-		resultStr += to_string(reseauDecompose[i]);
-		if (i != 3) {
-			resultStr += ".";
-		}
-	}
-	
-	return resultStr;
+	return convertArrayToString(reseauDecompose);
 }
 
 // Adresse dernière machine
@@ -292,15 +281,7 @@ string ipDerniere(string ip, string masque) {
 	}
 
 	// Transformation du résultat en string
-	string resultStr = "";
-	for (int i = 0; i < 4; i++) {
-		resultStr += to_string(reseauDecompose[i]);
-		if (i != 3) {
-			resultStr += ".";
-		}
-	}
-
-	return resultStr;
+	return convertArrayToString(reseauDecompose);
 }
 
 // Adresse de diffusion
@@ -325,13 +306,5 @@ string ipBroadcast(string ip, string masque) {
 	derniereMachineDecompose[3]++;
 
 	// Transformation du résultat en string
-	string resultStr = "";
-	for (int i = 0; i < 4; i++) {
-		resultStr += to_string(derniereMachineDecompose[i]);
-		if (i != 3) {
-			resultStr += ".";
-		}
-	}
-
-	return resultStr;
+	return convertArrayToString(derniereMachineDecompose);
 }

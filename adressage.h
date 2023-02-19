@@ -30,6 +30,7 @@ string ipBroadcast(string ip = "", string masque = "");
 // Outils
 int convertToInt(const string& v);
 string saisirValeur(const string& description);
+string convertArrayToString(int* array);
 bool isInRange(int v);
 int* decomposeIP(string ip);
 int bitsDeReseau(string masque = "");
